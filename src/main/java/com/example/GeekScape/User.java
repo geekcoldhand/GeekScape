@@ -8,19 +8,16 @@ import java.util.List;
 
 @Entity
 public class User {
-
     @Id
     @GeneratedValue
     private Long id;
     private String username;
+    private String email;
     private String password;
-    private String name;
     private String profileGif;
-    private Integer phoneNumber;
-    private Integer age;
     private String location;
     private Archetype archetype;
-    private List<String> socailLinks;
+    private List<String> socialLinks;
 
     public Long getId() {
         return id;
@@ -37,21 +34,18 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
-
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getProfileGif() {
@@ -62,21 +56,6 @@ public class User {
         this.profileGif = profileGif;
     }
 
-    public Integer getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(Integer phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
     public String getLocation() {
         return location;
     }
@@ -93,12 +72,12 @@ public class User {
         this.archetype = archetype;
     }
 
-    public List<String> getSocailLinks() {
-        return socailLinks;
+    public List<String> getSocialLinks() {
+        return socialLinks;
     }
 
-    public void setSocailLinks(List<String> socailLinks) {
-        this.socailLinks = socailLinks;
+    public void setSocialLinks(List<String> socialLinks) {
+        this.socialLinks = socialLinks;
     }
 
 

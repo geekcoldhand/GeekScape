@@ -7,7 +7,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class GeekScapeApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(GeekScapeApplication.class, args);
+
+		try {
+			SpringApplication.run(GeekScapeApplication.class, args);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }

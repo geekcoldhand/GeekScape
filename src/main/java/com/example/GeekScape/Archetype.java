@@ -12,6 +12,8 @@ public class Archetype {
    private Boolean likesReading;
    private Boolean isFamilyOriented;
 
+
+
    public Integer getArchetypeIndexScore() {
       return archetypeIndexScore;
    }

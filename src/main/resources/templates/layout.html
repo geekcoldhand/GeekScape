@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+</head>
+<body>
+<h1 th:text ="${user.name}">Hello, World my name is . .</h1>
+<span th:text="${user.job}">Title</span>
+<section class="content">
+    <div layout:fragment="content">
+
+    </div>
+</section>
+
+</body>
+</html>
