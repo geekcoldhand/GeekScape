@@ -6,13 +6,18 @@
     <title>Main</title>
 </head>
 <body>
-<h1 th:text ="${user.name}">Hello, World my name is . .</h1>
-<span th:text="${user.job}">Title</span>
-<section class="content">
-    <div layout:fragment="content">
+<div th:unless="${#lists.isEmpty(users)}">
+    <dl th:each="user : ${users}">
 
+        <h1 th:text ="${user.name}">Hello, World my name is . .</h1>
+        <span th:text="${user.name}">Title</span>
+        <section class="content">
+            <div layout:fragment="content">
+            </div>
+        </section>
+
+    </dl>
     </div>
-</section>
 
 </body>
 </html>

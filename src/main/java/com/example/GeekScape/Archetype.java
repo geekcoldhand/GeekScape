@@ -1,6 +1,13 @@
 package com.example.GeekScape;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import org.springframework.stereotype.Component;
+
+@Entity
 public class Archetype {
+
+   @Id private Long id;
 
    private Integer archetypeIndexScore;
    private Integer musicIndex;
@@ -12,6 +19,8 @@ public class Archetype {
    private Boolean likesReading;
    private Boolean isFamilyOriented;
 
+   public Archetype() {
+   }
 
 
    public Integer getArchetypeIndexScore() {

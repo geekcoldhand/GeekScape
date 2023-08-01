@@ -3,11 +3,13 @@ package com.example.GeekScape;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 @Entity
-public class User {
+public class UserType {
     @Id
     @GeneratedValue
     private Long id;
@@ -16,9 +18,16 @@ public class User {
     private String password;
     private String profileGif;
     private String location;
+    @Autowired
+    @ManyToOne
     private Archetype archetype;
     private List<String> socialLinks;
 
+    protected UserType() {}
+    public UserType(String email, String password ){
+        this.email = email;
+        this.password = password;
+    }
     public Long getId() {
         return id;
     }
@@ -64,13 +73,13 @@ public class User {
         this.location = location;
     }
 
-    public Archetype getArchetype() {
-        return archetype;
-    }
-
-    public void setArchetype(Archetype archetype) {
-        this.archetype = archetype;
-    }
+//    public Archetype getArchetype() {
+//        return archetype;
+//    }
+//
+//    public void setArchetype(Archetype archetype) {
+//        this.archetype = archetype;
+//    }
 
     public List<String> getSocialLinks() {
         return socialLinks;
