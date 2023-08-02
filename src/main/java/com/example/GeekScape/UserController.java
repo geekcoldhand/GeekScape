@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.*;
 
 
 @Controller
@@ -22,7 +22,7 @@ public class UserController {
     @GetMapping("/user")
     public String getAllUsers(Model model) {
         try{
-            Iterable<UserType> allUsers = userRepo.findAll();
+            List<UserType> allUsers = userRepo.findAll();
             model.addAttribute("users", allUsers);
             return "layout"; //returns the mainFeed view fragment
 
@@ -34,17 +34,25 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    public String createNewUser(@RequestBody List req, Model model) {
-//
+    public String createNewUser(@RequestBody UserType req, Model model) {
+        List<UserType> newPerson = new ArrayList<>();
+
+
         try {
-            List<UserType>  newPerson = userRepo.save(req);
-            model.addAttribute("name", "horatiuos");
-            return "redirect";
+            //pass req body to create method on CRUDRepository
+            newPerson.add(req);
+            userRepo.save(newPerson);
+//            = userRepo.save(req);
+            newPerson.add(req);
+            //assign the users List to the model to call ${users} view variable
+            model.addAttribute("users", newPerson);
+            //return the name of the view
+            return "layout";
 
         }catch (Exception e ){
-            model.addAttribute("exception", e.getMessage());
+            model.addAttribute("exception", e.getMessage()); //pass exception message to model
         }
-        //send errorPage fragment
+        //render message from model on errorPage fragment
         return "errorPage";
     }
 

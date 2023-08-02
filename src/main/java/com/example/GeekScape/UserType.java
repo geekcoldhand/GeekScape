@@ -1,5 +1,6 @@
 package com.example.GeekScape;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -13,15 +14,15 @@ public class UserType {
     @Id
     @GeneratedValue
     private Long id;
+
+    @JsonProperty
     private String username;
     private String email;
     private String password;
     private String profileGif;
     private String location;
-    @Autowired
-    @ManyToOne
-    private Archetype archetype;
-    private List<String> socialLinks;
+
+//    private List<String> socialLinks;
 
     protected UserType() {}
     public UserType(String email, String password ){
@@ -73,21 +74,14 @@ public class UserType {
         this.location = location;
     }
 
-//    public Archetype getArchetype() {
-//        return archetype;
+
+//    public List<String> getSocialLinks() {
+//        return socialLinks;
 //    }
 //
-//    public void setArchetype(Archetype archetype) {
-//        this.archetype = archetype;
+//    public void setSocialLinks(List<String> socialLinks) {
+//        this.socialLinks = socialLinks;
 //    }
-
-    public List<String> getSocialLinks() {
-        return socialLinks;
-    }
-
-    public void setSocialLinks(List<String> socialLinks) {
-        this.socialLinks = socialLinks;
-    }
 
 
 }

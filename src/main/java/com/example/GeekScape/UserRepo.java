@@ -1,16 +1,21 @@
 package com.example.GeekScape;
 
 
+import org.h2.engine.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface UserRepo extends CrudRepository<UserType, Long> {
+public interface UserRepo extends JpaRepository<UserType, Long> {
     List<UserType> findByUsername(@Param("username") String username);
-//    List<UserType> save(UserType userType);
-//    <List extends UserType> List save(List req);
+    @Override
+    List<UserType> findAll();
+    
+    @Override
+    <List extends UserType> List save(List entity);
 
-    List<UserType> save(List req);
+    void save(List<UserType> newPerson);
 }
