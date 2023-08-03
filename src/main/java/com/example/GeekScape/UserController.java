@@ -12,7 +12,7 @@ import java.util.*;
 @Controller
 public class UserController {
 
-    private UserRepo userRepo;
+    private final UserRepo userRepo;
 
     @Autowired
     public UserController(UserRepo userRepo) {
@@ -21,12 +21,16 @@ public class UserController {
 
     @GetMapping("/user")
     public String getAllUsers(Model model) {
-        try{
+        try {
             List<UserType> allUsers = userRepo.findAll();
+//            List<UserType> allUsers = List.of(new UserType("horatious", "helloGang"),
+//                    new UserType("ray", "smallWorld"),
+//                    new UserType("charles", "helloGang"));
+
             model.addAttribute("users", allUsers);
             return "layout"; //returns the mainFeed view fragment
 
-        }catch (Exception e){
+        } catch (Exception e) {
             model.addAttribute("exception", e.getMessage());
 
         }
@@ -49,7 +53,7 @@ public class UserController {
             //return the name of the view
             return "layout";
 
-        }catch (Exception e ){
+        } catch (Exception e) {
             model.addAttribute("exception", e.getMessage()); //pass exception message to model
         }
         //render message from model on errorPage fragment
