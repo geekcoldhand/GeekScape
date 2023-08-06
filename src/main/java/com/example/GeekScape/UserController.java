@@ -11,9 +11,7 @@ import java.util.*;
 
 @Controller
 public class UserController {
-
     private final UserRepo userRepo;
-
     @Autowired
     public UserController(UserRepo userRepo) {
         this.userRepo = userRepo;
@@ -22,31 +20,25 @@ public class UserController {
     @GetMapping("/user")
     public String getAllUsers(Model model) {
         try {
-            List<UserType> allUsers = userRepo.findAll();
-//            List<UserType> allUsers = List.of(new UserType("horatious", "helloGang"),
-//                    new UserType("ray", "smallWorld"),
-//                    new UserType("charles", "helloGang"));
+            List<UserType> allUsers = new ArrayList<>();
+                   allUsers.addAll(userRepo.findAll());
 
-            model.addAttribute("users", allUsers);
-            return "layout"; //returns the mainFeed view fragment
+            model.addAttribute("users", allUsers); //pass allUsers to users var in view
+            return "layout";
 
         } catch (Exception e) {
             model.addAttribute("exception", e.getMessage());
-
         }
         return "errorPage";
     }
 
     @PostMapping("/user")
     public String createNewUser(@RequestBody UserType req, Model model) {
-        List<UserType> newPerson = new ArrayList<>();
-
-
         try {
+            List<UserType> newPerson = new ArrayList<>();
             //pass req body to create method on CRUDRepository
             newPerson.add(req);
             userRepo.save(newPerson);
-//            = userRepo.save(req);
             newPerson.add(req);
             //assign the users List to the model to call ${users} view variable
             model.addAttribute("users", newPerson);

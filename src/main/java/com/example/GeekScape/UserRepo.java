@@ -15,9 +15,6 @@ public interface UserRepo extends JpaRepository<UserType, Long> {
     List<UserType> findByUsername(@Param("username") String username);
     @Override
     List<UserType> findAll();
-    
-    @Override
-    <List extends UserType> List save(List entity);
 
     void save(List<UserType> newPerson);
 }
