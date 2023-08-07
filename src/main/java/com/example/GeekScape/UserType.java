@@ -14,21 +14,23 @@ public class UserType {
     @Id
     @GeneratedValue
     private Long id;
-
-    @JsonProperty
     private String username;
     private String email;
     private String password;
     private String profileGif;
     private String location;
 
-//    private List<String> socialLinks;
-
     protected UserType() {}
     public UserType(String email, String password ){
         this.email = email;
         this.password = password;
     }
+    public UserType(String email, String username, String password ){
+        this.email = email;
+        this.username = username;
+        this.password = password;
+    }
+
     public Long getId() {
         return id;
     }
@@ -74,14 +76,6 @@ public class UserType {
         this.location = location;
     }
 
-
-//    public List<String> getSocialLinks() {
-//        return socialLinks;
-//    }
-//
-//    public void setSocialLinks(List<String> socialLinks) {
-//        this.socialLinks = socialLinks;
-//    }
 
 
 }

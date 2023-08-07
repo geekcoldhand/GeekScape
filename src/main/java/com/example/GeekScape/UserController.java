@@ -12,6 +12,7 @@ import java.util.*;
 @Controller
 public class UserController {
     private final UserRepo userRepo;
+
     @Autowired
     public UserController(UserRepo userRepo) {
         this.userRepo = userRepo;
@@ -20,10 +21,8 @@ public class UserController {
     @GetMapping("/user")
     public String getAllUsers(Model model) {
         try {
-            List<UserType> allUsers = new ArrayList<>();
-                   allUsers.addAll(userRepo.findAll());
 
-            model.addAttribute("users", allUsers); //pass allUsers to users var in view
+            model.addAttribute("users", userRepo.findAll()); //pass allUsers to users var in view
             return "layout";
 
         } catch (Exception e) {

@@ -11,8 +11,8 @@
 
 <div th:fragment="pageFeed">
     <section th:each="user : ${users}">
-        <h1 >Hello, World my name is . .</h1> <p th:text ="${user.name}"></p>
-        <span th:text="${user.name}">Title</span>
+        <h1 >Hello, World my name is . .</h1> <p th:text ="${user.username}"></p>
+        <span th:text="${user.email}">Title</span>
         <div th:unless="${#lists.isEmpty(users)}">
         </div>
 
