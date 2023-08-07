@@ -12,7 +12,6 @@ public class UserConfig {
     @Bean
     CommandLineRunner commandLineRunner(UserRepo userRepo) {
         return args -> {
-
             UserType kay = new UserType();
             UserType ray = new UserType("rash@gmail.com", "generate2008");
             UserType jay = new UserType("jay@gmail.com", "generate2008");
