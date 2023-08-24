@@ -1,0 +1,19 @@
+:root {
+  --pri-color: #475251;
+  --bkg-color: #717275;
+  --sec-color: #2a3035;
+
+  --link: #588883;
+}
+body {
+  background-color: #475251;
+
+}
+
+.new-post {
+  background-color: #588883;
+  height: fit-content;
+  width: fit-content;
+  justify-self: end;
+}
+

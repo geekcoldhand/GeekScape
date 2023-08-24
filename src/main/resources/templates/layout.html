@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Main</title>
+    <link rel="stylesheet" href="/css/general.css">
 </head>
 <body>
+<header th:replace="~{header.html :: header}"></header>
 <h1>Users</h1>
 <div th:layout="${users}">
 <div th:if="${users}">

@@ -1,6 +1,6 @@
-package com.example.GeekScape;
+package com.example.GeekScape.User;
 
-import org.h2.engine.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,9 +46,11 @@ public class UserController {
 
         } catch (Exception e) {
             model.addAttribute("exception", e.getMessage()); //pass exception message to model
+
         }
         //render message from model on errorPage fragment
         return "errorPage";
     }
+
 
 }

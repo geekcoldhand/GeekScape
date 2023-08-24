@@ -1,4 +1,4 @@
-package com.example.GeekScape;
+package com.example.GeekScape.User;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
@@ -6,27 +6,40 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.List;
 
-@Entity
+
+@Entity(name = "Users")
+@Table(name = "users")
 public class UserType {
-    public UserType(Long id, String username, String email, String password, String profileGif, String location, LocalDate dob) {
-        this.id = id;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.profileGif = profileGif;
-        this.location = location;
-        this.dob = dob;
-    }
+
 
     @Id
     @GeneratedValue
+    @Column(
+            name = "id",
+            updatable = false
+    )
     private Long id;
+    @Column(
+            name = "username"
+
+    )
     private String username;
+    @Column(
+            name = "email"
+
+    )
     private String email;
+    @Column(
+            name = "password"
+    )
     private String password;
+    @Column(
+            name = "profile_gif"
+    )
     private String profileGif;
+    @Column(name = "location"
+    )
     private String location;
     @Transient
     private Integer age;
@@ -52,7 +65,15 @@ public class UserType {
         this.password = password;
         this.dob = dob;
     }
-
+    public UserType(Long id, String username, String email, String password, String profileGif, String location, LocalDate dob) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.profileGif = profileGif;
+        this.location = location;
+        this.dob = dob;
+    }
     public Long getId() {
         return id;
     }
@@ -101,11 +122,20 @@ public class UserType {
         this.location = location;
     }
 
-    public LocalDate getDob() {return dob;}
+    public LocalDate getDob() {
+        return dob;
+    }
 
-    public void setDob(LocalDate dob) {this.dob = dob;}
+    public void setDob(LocalDate dob) {
+        this.dob = dob;
+    }
 
-    public Integer getAge() {return Period.between(this.dob, LocalDate.now()).getYears();}
+    public Integer getAge() {
+        return Period.between(
+                this.dob, LocalDate.now()).getYears();
+    }
 
-    public void setAge(Integer age) {this.age = age;}
+    public void setAge(Integer age) {
+        this.age = age;
+    }
 }
