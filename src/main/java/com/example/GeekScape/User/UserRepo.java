@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface UserRepo extends JpaRepository<UserType, Long> {
-    List<UserType>  save(List<UserType> newPerson);
+   int createUser(UserType newPerson);
 
     @Override
     List<UserType> findAll();
@@ -16,6 +16,6 @@ public interface UserRepo extends JpaRepository<UserType, Long> {
     @Query("SELECT u FROM Users u WHERE u.username = :username")
     List<UserType> findByUsername(String username);
 
+    UserType findUserById(long l);
 
-    //void save(List<UserType> newPerson);
 }

@@ -1,12 +1,7 @@
 package com.example.GeekScape.User;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.time.LocalDate;
 import java.time.Period;
-
 
 @Entity(name = "Users")
 @Table(name = "users")
@@ -22,16 +17,16 @@ public class UserType {
     private Long id;
     @Column(
             name = "username"
-
     )
     private String username;
     @Column(
-            name = "email"
-
+            name = "email",
+            nullable = false
     )
     private String email;
     @Column(
-            name = "password"
+            name = "password",
+            nullable = false
     )
     private String password;
     @Column(
@@ -48,18 +43,18 @@ public class UserType {
     protected UserType() {
     }
 
-    public UserType(String email, String password) {
+    public UserType(Long id, String email, String password) {
         this.email = email;
         this.password = password;
     }
 
-    public UserType(String email, String username, String password) {
+    public UserType(Long id, String email, String username, String password) {
         this.email = email;
         this.username = username;
         this.password = password;
     }
 
-    public UserType(String email, String username, String password, LocalDate dob) {
+    public UserType(Long id, String email, String username, String password, LocalDate dob) {
         this.email = email;
         this.username = username;
         this.password = password;

@@ -1,13 +1,11 @@
 package com.example.GeekScape.User;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
-
 
 @Controller
 public class UserController {
@@ -18,7 +16,7 @@ public class UserController {
         this.userRepo = userRepo;
     }
 
-    @GetMapping("/user")
+    @GetMapping("/users")
     public String getAllUsers(Model model) {
         try {
 
@@ -31,14 +29,11 @@ public class UserController {
         return "errorPage";
     }
 
-    @PostMapping("/user")
+    @PostMapping("/users")
     public String createNewUser(@RequestBody UserType req, Model model) {
         try {
-            List<UserType> newPerson = new ArrayList<>();
-            //pass req body to create method on CRUDRepository
-            newPerson.add(req);
+            UserType newPerson = req;
             userRepo.save(newPerson);
-            newPerson.add(req);
             //assign the users List to the model to call ${users} view variable
             model.addAttribute("users", newPerson);
             //return the name of the view
