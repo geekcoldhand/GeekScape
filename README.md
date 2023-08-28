@@ -1,35 +1,11 @@
 # Scape: TTD
 
-## Overview
+## Purpose
 
 This system's purpose is to allow users to register life small and large trophies (Accolades) in their respective
 communities while centralizing their individual story progress. The system will handle user registration, community
 enrollment, and accolade progress tracking.
 
-## Architecture
-
-The system will follow a client-server architecture. The client-side will be responsible for handling user interactions
-and displaying the user interface. The server-side will handle the business logic, data storage, and communication with
-external systems.
-
-## Components
-
-The system will consist of the following components:
-
-- **User Interface**: This component will provide a user-friendly interface for users to register, enroll in
-  communities, and view their accolade progress.
-
-- **Registration Module**: This module will handle user registration by capturing user details, validating the
-  information, and storing it in the user database.
-
-- **Community Management Module**: This module will handle community management, including community creation,
-  enrollment, and accolade progress tracking.
-
-- **Accolade Tracking Module**: This module will handle the tracking of individual accolade progress, allowing users to
-  register and update their trophies.
-
-- **Database**: The system will utilize a database to store user information, community details, accolade progress, and
-  other relevant data.
 
 ## Workflow
 
@@ -58,7 +34,3 @@ The system will utilize PostgreSQL to (a relational database) to store user info
 progress, and other relevant data. The database will have tables for users, communities, accolades, and progress
 tracking.
 
-## Security Considerations
-
-To ensure the security of user data, the system will implement measures such as encryption for sensitive information,
-secure authentication, and authorization mechanisms.
