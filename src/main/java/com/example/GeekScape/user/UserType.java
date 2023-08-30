@@ -1,4 +1,4 @@
-package com.example.GeekScape.User;
+package com.example.GeekScape.user;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;

@@ -1,4 +1,4 @@
-package com.example.GeekScape.User;
+package com.example.GeekScape.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
