@@ -3,6 +3,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
 
+
 @Entity(name = "Users")
 @Table(name = "users")
 public class UserType {
@@ -15,9 +16,7 @@ public class UserType {
             updatable = false
     )
     private Long id;
-    @Column(
-            name = "username"
-    )
+
     private String username;
     @Column(
             name = "email",
@@ -33,14 +32,13 @@ public class UserType {
             name = "profile_gif"
     )
     private String profileGif;
-    @Column(name = "location"
-    )
+
     private String location;
     @Transient
     private Integer age;
     private LocalDate dob;
 
-    protected UserType() {
+    public UserType() {
     }
 
     public UserType(Long id, String email, String password) {

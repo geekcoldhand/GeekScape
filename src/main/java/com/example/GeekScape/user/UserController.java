@@ -1,8 +1,12 @@
 package com.example.GeekScape.user;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/")
 public class UserController {
     private final UserRepo userRepo;
 
@@ -19,29 +24,34 @@ public class UserController {
         this.userRepo = userRepo;
     }
 
-    @GetMapping("/all-users")
+    @GetMapping("all-users")
     public List<UserType> getAllUsers() {
-        ArrayList allUsers = new ArrayList<>();
+        List allUsers = new ArrayList<>();
         if(userRepo.findAll() != null){
-            allUsers = (ArrayList) userRepo.findAll();
+            allUsers = userRepo.findAll();
         }
         return allUsers;
     }
 
-    @GetMapping("/users")
-    public UserType getUserById(Long id) {
+    @GetMapping("users/{id}")
+    public UserType getUserById(@PathVariable("id") @NonNull Long id) {
         if(userRepo.findUserById(id) != null){
             return userRepo.findUserById(id);
         }
         return new UserType();
     }
 
-    @PostMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "users", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public UserType createNewUser(@RequestBody UserType req) {
-        UserType user = req;
-        userRepo.save(user);
-        return user;
+    public ResponseEntity<UserType> createNewUser(@RequestBody UserType req) {
+        UserType savedUser = new UserType();
+        UserType reqUser = new UserType();
+        if(req != null){
+            reqUser = req;
+            savedUser = userRepo.save(reqUser);
+        }
+
+    return new ResponseEntity<UserType>(reqUser, HttpStatus.CREATED);
 
     }
 
