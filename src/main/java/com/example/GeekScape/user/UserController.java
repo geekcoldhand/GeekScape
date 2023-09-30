@@ -20,6 +20,9 @@ public class UserController {
     private final UserRepo userRepo;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     public UserController(UserRepo userRepo) {
         this.userRepo = userRepo;
     }
@@ -27,16 +30,16 @@ public class UserController {
     @GetMapping("all-users")
     public List<UserType> getAllUsers() {
         List allUsers = new ArrayList<>();
-        if(userRepo.findAll() != null){
-            allUsers = userRepo.findAll();
+        if(userService.allUsers() != null){
+            allUsers = userService.allUsers();
         }
         return allUsers;
     }
 
     @GetMapping("users/{id}")
     public UserType getUserById(@PathVariable("id") @NonNull Long id) {
-        if(userRepo.findUserById(id) != null){
-            return userRepo.findUserById(id);
+        if(userService.getById(id) != null){
+            return userService.getById(id);
         }
         return new UserType();
     }
@@ -48,7 +51,7 @@ public class UserController {
         UserType reqUser = new UserType();
         if(req != null){
             reqUser = req;
-            savedUser = userRepo.save(reqUser);
+            savedUser = userService.add(reqUser);
         }
 
     return new ResponseEntity<UserType>(reqUser, HttpStatus.CREATED);

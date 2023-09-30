@@ -2,6 +2,7 @@ package com.example.GeekScape;
 
 import com.example.GeekScape.user.UserController;
 import com.example.GeekScape.user.UserRepo;
+import com.example.GeekScape.user.UserService;
 import com.example.GeekScape.user.UserType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,14 +33,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(MockitoExtension.class)
 public class UserControllerTest {
     private final Logger logger = LoggerFactory.getLogger(UserControllerTest.class);
-
     @Autowired
-    private MockMvc mockMvc;
+    private MockMvc mockMvc ;
+    @Mock
+    private UserService userService;
     @Mock
     private UserRepo userRepo;
-
     @Mock
     private UserType userType;
+
 
     @BeforeEach
     void setUp() {
@@ -49,21 +51,18 @@ public class UserControllerTest {
 
     @Test
     void whenFindUserByID_thenReturnUserOfId() throws Exception {
-        when(userType.getEmail()).thenReturn("horatious@g.com");
-        when(userType.getId()).thenReturn(1L);
-        when(userType.getUsername()).thenReturn("horaHarris");
-
-        when(userRepo.findByUsername(anyString())).thenReturn(userType);
         UserType userType1 = new UserType();
-
         userType1.setEmail("horatious@g.com");
         userType1.setId(1L);
         userType1.setUsername("horaHarris");
+        userRepo.save(userType1);
 
-        UserType actualResponse = userRepo.createUser(userType1);
+        when(userRepo.findByUsername(anyString())).thenReturn(userType);
+        UserType actualResponse = userService.add(userType1);
 
+        Mockito.verify(userRepo).save(Mockito.any(UserType.class));
         assertNotNull(actualResponse);
-        assertEquals("1L",actualResponse.getId());
+        assertEquals(1L,actualResponse.getId().longValue());
 
     }
 
@@ -73,14 +72,11 @@ public class UserControllerTest {
         //arrange
         UserType user = new UserType(3L, "Sarah@gmail.com", "sarah");
 
-        //act
-        // Mock the behavior of userRepo.createUser() method
+
         when(userRepo.createUser(Mockito.any(UserType.class))).thenReturn(user);
-        //assertion
         MockHttpServletRequestBuilder request = post("/users")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(String.valueOf(user));
-
         mockMvc.perform(request)
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -88,10 +84,8 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.email").value("Sarah@gmail.com"))
                 .andExpect(jsonPath("$.username").value("sarah"));
 
-        // Verify that the userRepo.createUser() method was called with the correct argument
-        Mockito.verify(userRepo).createUser(Mockito.any(UserType.class));
 
-        // Verify that the userRepo.findUserById() method was called with the correct argument
+        Mockito.verify(userRepo).createUser(Mockito.any(UserType.class));
         Mockito.verify(userRepo).findUserById(3L);
     }
 
@@ -104,10 +98,6 @@ public class UserControllerTest {
         userRepo.createUser(user);
         userRepo.createUser(user1);
         userRepo.createUser(user2);
-        // Mock the behavior of userRepo.createUser() method
-        when(userRepo.createUser(Mockito.any(UserType.class))).thenReturn(user);
-
-
 
 
     }
