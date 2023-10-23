@@ -7,13 +7,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class UserControllerTest {
+public class UserServiceTest {
 
 
     @Mock
@@ -44,21 +45,16 @@ public class UserControllerTest {
     void whenPostUser_thenReturnSavedUser() throws Exception {
         userType.setEmail("horatious@g.com");
         userType.setId(3L);
+
         var userTypeName = "horaHarris";
-        //userRepo.save(userType);
 
         when(userType.getUsername()).thenReturn(userTypeName);
         assertThat("horaHarris").isEqualTo(userType.getUsername());
-//        Mockito.verify(userRepo).createUser(Mockito.any(UserType.class));
-//        Mockito.verify(userRepo).findUserById(3L);
     }
 
 
     @Test
     void whenGetAllUser_thenReturnAllUsers() throws Exception {
-//        var userX = Mockito.mock(UserType.class);
-//        var userY = Mockito.mock(UserType.class);
-//        var userZ = Mockito.mock(UserType.class);
         var allUsers = List.of(userType);
 
         when(userService.add(any(UserType.class))).thenReturn(userType);

@@ -1,7 +1,5 @@
 package com.example.GeekScape.user;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
 import jakarta.persistence.*;
-import org.hibernate.annotations.Type;
 
 import java.time.LocalDate;
 import java.time.Period;
