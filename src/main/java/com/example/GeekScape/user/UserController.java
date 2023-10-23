@@ -1,21 +1,17 @@
 package com.example.GeekScape.user;
 
-import jakarta.servlet.http.HttpServletResponse;
-import org.apache.catalina.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api/users")
 public class UserController {
     private final UserRepo userRepo;
 
@@ -23,8 +19,10 @@ public class UserController {
     private UserService userService;
 
     @Autowired
-    public UserController(UserRepo userRepo) {
+    protected UserController(UserRepo userRepo, UserService userService) {
         this.userRepo = userRepo;
+        this.userService = userService;
+
     }
 
     @GetMapping("all-users")
@@ -36,7 +34,7 @@ public class UserController {
         return allUsers;
     }
 
-    @GetMapping("users/{id}")
+    @GetMapping("/{id}")
     public UserType getUserById(@PathVariable("id") @NonNull Long id) {
         if(userService.getById(id) != null){
             return userService.getById(id);
@@ -44,8 +42,7 @@ public class UserController {
         return new UserType();
     }
 
-    @PostMapping(value = "users", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
+    @PostMapping
     public ResponseEntity<UserType> createNewUser(@RequestBody UserType req) {
         UserType savedUser = new UserType();
         UserType reqUser = new UserType();

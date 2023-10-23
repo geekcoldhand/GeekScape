@@ -1,41 +1,39 @@
 package com.example.GeekScape.user;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 import jakarta.persistence.*;
+import org.hibernate.annotations.Type;
+
 import java.time.LocalDate;
 import java.time.Period;
 
 
-@Entity(name = "Users")
+@Entity
 @Table(name = "users")
 public class UserType {
-
-
     @Id
     @GeneratedValue
-    @Column(
-            name = "id",
-            updatable = false
-    )
+    @Column(name = "id", columnDefinition = "BIGINT")
     private Long id;
 
+    @Column(name = "username", columnDefinition = "VARCHAR(255)")
     private String username;
-    @Column(
-            name = "email",
-            nullable = false
-    )
+
+    @Column(name = "email", nullable = false, columnDefinition = "VARCHAR(255)")
     private String email;
-    @Column(
-            name = "password",
-            nullable = false
-    )
+
+    @Column(name = "password", nullable = false, columnDefinition = "VARCHAR(255)")
     private String password;
-    @Column(
-            name = "profile_gif"
-    )
+
+    @Column(name = "profile_gif", columnDefinition = "VARCHAR(255)")
     private String profileGif;
 
+    @Column(name = "location", columnDefinition = "VARCHAR(255)")
     private String location;
+
     @Transient
     private Integer age;
+
+    @Column(name = "dob", columnDefinition = "DATE")
     private LocalDate dob;
 
     public UserType() {

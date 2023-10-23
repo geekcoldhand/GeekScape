@@ -10,25 +10,24 @@ public class UserService {
     @Autowired
     private UserRepo userRepo;
 
-
-
-    public List<UserType> allUsers(){
+    public List<UserType> allUsers() {
         return userRepo.findAll();
     }
-    public UserType getById(Long id){
+
+    public UserType getById(Long id) {
         return userRepo.findUserById(id);
     }
-    public UserType add (UserType userType){
+
+    public UserType add(UserType userType) {
         return userRepo.save(userType);
     }
 
-    public UserType update (UserType userType , Long id ) throws UserNotFoundException{
-        if (userRepo.findById(id).isPresent()){
+    public UserType update(UserType userType, Long id) throws UserNotFoundException {
+        if (userRepo.findById(id).isPresent()) {
             return userRepo.save(userType);
         }
-        throw new UserNotFoundException("User Not Found") ;
+        throw new UserNotFoundException("User Not Found");
     }
-
 
 
 }
