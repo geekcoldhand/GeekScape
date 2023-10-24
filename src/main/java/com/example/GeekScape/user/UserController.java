@@ -2,8 +2,6 @@ package com.example.GeekScape.user;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +26,7 @@ public class UserController {
     @GetMapping("all-users")
     public List<UserType> getAllUsers() {
         List allUsers = new ArrayList<>();
-        if(userService.allUsers() != null){
+        if (userService.allUsers() != null) {
             allUsers = userService.allUsers();
         }
         return allUsers;
@@ -36,22 +34,22 @@ public class UserController {
 
     @GetMapping("/{id}")
     public UserType getUserById(@PathVariable("id") @NonNull Long id) {
-        if(userService.getById(id) != null){
+        if (userService.getById(id) != null) {
             return userService.getById(id);
         }
         return new UserType();
     }
 
     @PostMapping
-    public ResponseEntity<UserType> createNewUser(@RequestBody UserType req) {
+    public UserType createNewUser(@RequestBody UserType req) {
         UserType savedUser = new UserType();
         UserType reqUser = new UserType();
-        if(req != null){
+        if (req != null) {
             reqUser = req;
             savedUser = userService.add(reqUser);
         }
 
-    return new ResponseEntity<UserType>(reqUser, HttpStatus.CREATED);
+        return savedUser;
 
     }
 
