@@ -23,10 +23,6 @@ public class UserServiceTest {
     private UserType userType;
 
 
-    @BeforeEach
-    void setUp() {
-
-    }
 
     @Test
     void whenFindUserByID_thenReturnUserOfId() throws Exception {
